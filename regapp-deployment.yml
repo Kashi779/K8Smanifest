@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: saidemy-regapp 
+# Above section is all about deployment name and deployment
+
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels:  # Corrected typo here
+      app: regapp # Should match with service selector
+
+  template: 
+    metadata:
+      labels: 
+        app: regapp
+# Metadata section is pod definition
+
+    spec:
+      containers:  # Changed from 'container' to 'containers'
+      - name: regapp
+        image: kashi779/regapp
+        imagePullPolicy: Always  # Corrected typo
+        ports:
+        - containerPort: 8080   # Corrected typo
+
+# spec section is container definition
+# Entire above section till template is all about template to create a pod
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1  # Corrected typo
+# Strategy section is all about making sure update only one pod at a time.
+

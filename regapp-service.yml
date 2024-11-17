@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: saidemy-service
+  labels:
+    app: regapp
+# Metadata section includes the service name and label
+
+spec:
+  selector:
+    app: regapp  # Should match with deployment label
+# Spec section determines to which deployment it can send traffic
+
+  ports:
+    - port: 8080        # Port exposed at the cluster level
+      targetPort: 8080  # Port that container listens on. Should match with deployment container.
+
+  type: LoadBalancer
+# Type section defines the service type
+
